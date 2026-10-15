@@ -26,8 +26,10 @@ export function detailedCountdown(milliseconds: number): string {
 }
 
 /** Shared by the real native caption and both preview examples. */
-export function formatCaption(original: string, prefs: DisplayPreferences, status: { band: Band; countdown: string | null }, identity?: ModelIdentity) {
+export function formatCaption(original: string, prefs: DisplayPreferences, status: { band: Band; countdown: string | null; remainingMs?: number | null }, identity?: ModelIdentity) {
   if (identity && !isDeepSeek(identity.id)) return null;
+  // Stable host provider IDs, never a user-edited display name.
+  if (prefs.scope === 'official' && identity && !['deepseek-account', 'deepseek-official'].includes(identity.provider ?? '')) return null;
   const idHasVersion = identity && /deepseek[\s/_-]+v?\d/i.test(identity.id);
   const compact = identity
     ? idHasVersion ? shortModelName(identity.id) : shortModelName(identity.name ?? '') ?? shortModelName(original) ?? shortModelName(identity.id)
@@ -39,7 +41,9 @@ export function formatCaption(original: string, prefs: DisplayPreferences, statu
   const suffix = suffixAt < 0 ? '' : ` ${original.slice(suffixAt).trim()}`;
   const model = (prefs.modelName === 'compact' ? compact : base) + (prefs.showSuffix ? suffix : '');
   const label = status.band === 'unknown' ? '待核实' : status.band === 'peak' ? (prefs.bandLabel === 'full' ? '峰时' : '峰') : (prefs.bandLabel === 'full' ? '谷时' : '谷');
-  const text = `${label}${prefs.showCountdown && status.band !== 'unknown' ? ` ${status.countdown ?? '· 待核实'}` : ''}`;
+  const remaining = status.remainingMs ?? (status.countdown && /^\d+:\d{2}$/.test(status.countdown) ? status.countdown.split(':').reduce((hours, minutes) => hours * 60 + Number(minutes), 0) * 60_000 : null);
+  const showCountdown = prefs.showCountdown && prefs.countdownMode !== 'off' && (prefs.countdownMode !== 'near' || (remaining !== null && remaining <= prefs.nearMinutes * 60_000));
+  const text = `${label}${showCountdown && status.band !== 'unknown' ? ` ${status.countdown ?? '· 待核实'}` : ''}`;
   return { model, band: `${prefs.appearance === 'text' ? ' · ' : ''}${text}` };
 }
 const readSchedule = createScheduleReader();
@@ -49,5 +53,5 @@ export function bandPresentation(now: number, data: HolidayCalendar) {
   const name = schedule.band === 'peak' ? '峰' : schedule.band === 'offpeak' ? '谷' : '待核实';
   const text = verified ? `${name} ${compactCountdown(schedule.next!.at - now)}` : `${name}${name === '待核实' ? '' : ' · 待核实'}`;
   const next = verified ? new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(schedule.next!.at) : null;
-  return { band: schedule.band, text, countdown: verified ? compactCountdown(schedule.next!.at - now) : null, next: verified ? schedule.next : null, nextTime: next, detail: `DeepSeek 官方峰谷参考（北京时间）${next ? `；下次切换：${next}` : '；节假日日历覆盖不足，切换时间待核实'}。第三方渠道可能采用不同计费规则。` };
+  return { band: schedule.band, text, remainingMs: verified ? schedule.next!.at - now : null, countdown: verified ? compactCountdown(schedule.next!.at - now) : null, next: verified ? schedule.next : null, nextTime: next, detail: `DeepSeek 官方峰谷参考（北京时间）${next ? `；下次切换：${next}` : '；节假日日历覆盖不足，切换时间待核实'}。第三方渠道可能采用不同计费规则。` };
 }

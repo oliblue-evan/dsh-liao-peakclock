@@ -1,4 +1,5 @@
 {
+  "moreOpen": false,
   "preview": [
     "DS4.1F · 峰 2:30",
     "DS4.1F · 谷 2:30"
@@ -13,13 +14,34 @@
     "显示偏好",
     "价格与规则"
   ],
-  "selects": [
-    "compact",
-    "text",
-    "short"
+  "segments": [
+    {
+      "label": "显示预设",
+      "selected": "标准"
+    },
+    {
+      "label": "模型名称",
+      "selected": "DS 简写"
+    },
+    {
+      "label": "提示样式",
+      "selected": "纯文字"
+    },
+    {
+      "label": "倒计时",
+      "selected": "始终"
+    },
+    {
+      "label": "峰谷文字",
+      "selected": "峰 / 谷"
+    },
+    {
+      "label": "生效范围",
+      "selected": "所有 DeepSeek"
+    }
   ],
+  "selects": [],
   "switches": [
-    true,
     true,
     false,
     true

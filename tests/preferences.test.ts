@@ -31,3 +31,13 @@ test('appearance presets preserve the enabled switch and legacy options migrate 
   saved.set('dsh-timeband/compact-preferences/v1', JSON.stringify({ enabled: true }));
   assert.equal(createPreferences(() => storage).getSnapshot().enabled, false);
 });
+
+test('legacy countdown flag migrates, near threshold and scope persist, visual presets preserve scope', () => {
+  const saved = new Map<string,string>([[PREFERENCES_KEY,JSON.stringify({showCountdown:false})]]);
+  const storage={getItem:(key:string)=>saved.get(key)??null,setItem:(key:string,value:string)=>{saved.set(key,value);}};
+  const store=createPreferences(()=>storage); assert.equal(store.getSnapshot().countdownMode,'off');
+  store.set({countdownMode:'near',nearMinutes:60,scope:'official'}); assert.equal(store.getSnapshot().showCountdown,true);
+  const next=createPreferences(()=>storage); assert.equal(next.getSnapshot().countdownMode,'near'); assert.equal(next.getSnapshot().nearMinutes,60); assert.equal(next.getSnapshot().scope,'official');
+  next.applyPreset('standard'); assert.equal(next.getSnapshot().scope,'official'); assert.equal(next.getSnapshot().nearMinutes,60);
+  next.set({showCountdown:false}); assert.equal(next.getSnapshot().countdownMode,'off');
+});

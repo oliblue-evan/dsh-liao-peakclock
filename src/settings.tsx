@@ -35,9 +35,9 @@ export function Settings({ view, preferences, calendarStore, clock }: {
   const calendarLabel = calendar.issue ? '本地日历存储异常' : coverage.expiresOn ? `已覆盖至 ${coverage.expiresOn}` : '当前年份待核实';
   return <div className="dtb-settings">
     <section className="dtb-status" aria-label="当前峰谷情况">
-      <div className="dtb-status-heading"><strong data-band={prefs.colored ? band.band : 'plain'}>{currentName}</strong><span>北京时间 {timeLabel} · {dayLabel}</span></div>
-      <div className="dtb-status-main">
-        <div><span className="dtb-label">{band.next ? `距离进入${nextName}` : '下次切换时间待核实'}</span><div className="dtb-status-countdown" role="timer" aria-label="切换倒计时（时分秒）" aria-live="off">{band.next ? detailedCountdown(band.next.at - now) : '—:—:—'}</div></div>
+      <div className="dtb-status-line">
+        <div className="dtb-status-identity"><strong data-band={prefs.colored ? band.band : 'plain'}>{currentName}</strong><span className="dtb-label">北京时间 {timeLabel} · {dayLabel}</span></div>
+        <div className="dtb-status-clock"><span className="dtb-label">{band.next ? `距${nextName}` : '切换待核实'}</span><span className="dtb-status-countdown" role="timer" aria-label="切换倒计时（时分秒）" aria-live="off">{band.next ? detailedCountdown(band.next.at - now) : '—:—:—'}</span></div>
         <div className="dtb-next-switch"><span className="dtb-label">下次切换 · 北京时间</span><span>{band.nextTime ?? '日历覆盖不足，暂不预测'}</span></div>
       </div>
       <div className="dtb-daytrack" data-colored={prefs.colored}>

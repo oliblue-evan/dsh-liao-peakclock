@@ -58,3 +58,14 @@ test('model identity takes precedence over aliases and provider-prefixed names',
   assert.equal(formatCaption('DeepSeek-V41-Flash', DEFAULT_PREFERENCES, status, { id: 'deepseek-flash' })!.model, 'DS4.1F');
   assert.equal(shortModelName('channel/deepseek-v4.1-flash'), 'DS4.1F');
 });
+
+test('near countdown respects exact threshold, official scope uses stable IDs and never hides the band', () => {
+  const near={...DEFAULT_PREFERENCES,countdownMode:'near' as const,nearMinutes:30 as const};
+  const source='DeepSeek-V4.1-Flash', status={band:'peak' as const,countdown:'0:30',remainingMs:30*60_000};
+  assert.match(formatCaption(source,near,status)!.band,/0:30/);
+  assert.equal(formatCaption(source,near,{...status,remainingMs:30*60_000+1})!.band,' · 峰');
+  assert.equal(formatCaption(source,near,{band:'unknown',countdown:null})!.band,' · 待核实');
+  const official={...near,scope:'official' as const};
+  for(const provider of ['deepseek-account','deepseek-official']) assert.ok(formatCaption(source,official,status,{id:'deepseek-v4.1-flash',provider}));
+  for(const provider of ['DeepSeek','deepseek-proxy','channel']) assert.equal(formatCaption(source,official,status,{id:'deepseek-v4.1-flash',provider}),null);
+});

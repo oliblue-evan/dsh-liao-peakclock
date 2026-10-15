@@ -46,10 +46,11 @@ test('settings keep reference disclosure open across live band changes and previ
     flushSync(() => preferences.set({ enabled: true }));
     assert.equal(doc.querySelectorAll('.dtb-sample [data-appearance="badge"]').length, 2);
     assert.match(doc.querySelector('.dtb-sample').textContent, /DeepSeek-V4.1-Flash · x0.11/);
-    const selector = doc.querySelector('.dtb-select-grid select');
+    const selector = doc.querySelector('[role=group][aria-label="模型名称"]');
     now += 1000; flushSync(() => { for (const fn of listeners) fn(); });
-    assert.equal(doc.querySelector('.dtb-select-grid select'), selector);
-    assert.equal(selector.value, 'original');
+    assert.equal(doc.querySelector('[role=group][aria-label="模型名称"]'), selector);
+    assert.equal(selector.querySelector('[aria-pressed=true]').textContent, '原始名称');
+    assert.equal(doc.querySelectorAll('select').length, 0);
     flushSync(() => doc.querySelector('.dtb-reset').click());
     assert.equal(preferences.getSnapshot().modelName, 'compact');
     assert.match(doc.querySelector('.dtb-sample').textContent, /DS4.1F/);

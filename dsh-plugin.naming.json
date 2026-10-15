@@ -12,7 +12,8 @@
       "peakclock"
     ],
     "loaderIds": [
-      "peakclock"
+      "peakclock",
+      "dsh-peakclock"
     ],
     "services": [],
     "tools": [],
@@ -20,7 +21,9 @@
     "skills": [],
     "skillProviders": [],
     "events": [],
-    "settingsNamespaces": [],
+    "settingsNamespaces": [
+      "dsh-peakclock"
+    ],
     "routes": []
   }
 }
