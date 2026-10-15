@@ -8,17 +8,17 @@
 
 桌面 DSH 中的实际模型按钮：
 
-![模型名称中的谷时状态与倒计时](docs/images/model-label.png)
+<img src="docs/images/model-label.png" alt="模型名称中的谷时状态与倒计时" width="185">
 
 峰时与谷时的显示效果：
 
-![峰时与谷时预览](docs/images/peak-valley-preview.png)
+<a href="docs/images/peak-valley-preview-hd.png"><img src="docs/images/peak-valley-preview-hd.png" alt="峰时与谷时预览" width="688"></a>
 
 设置页包含当前状态、时间轴、显示偏好及可折叠的计费说明：
 
-![峰谷倒计时设置页](docs/images/settings.png)
+<a href="docs/images/settings-hd.png"><img src="docs/images/settings-hd.png" alt="峰谷倒计时设置页" width="688"></a>
 
-后两张截图来自插件独立预览，使用示例模型和时间；展示的是实际插件组件。
+后两张截图来自插件独立预览，使用示例模型和时间；展示的是实际插件组件，按三倍分辨率渲染，点击可查看高清原图。
 
 ## 安装
 
