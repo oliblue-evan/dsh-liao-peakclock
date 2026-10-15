@@ -59,8 +59,8 @@ button[data-dtb-trigger] > [class*="_triggerEffort"]::before { content:"\xB7 "; 
 .dtb-settings .dtb-preview-heading { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px; }
 .dtb-settings .dtb-preview-heading strong { font-weight:500; }
 .dtb-settings .dtb-preview-heading > span { font-size:10px; opacity:.45; }
-.dtb-settings .dtb-preview-examples { display:grid; gap:8px; }
-.dtb-settings .dtb-preview-example { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.dtb-settings .dtb-preview-examples { display:grid; grid-template-columns:minmax(0,1fr); gap:8px; }
+.dtb-settings .dtb-preview-example { display:flex; min-width:0; align-items:center; justify-content:space-between; gap:12px; }
 .dtb-settings .dtb-example-label { flex-shrink:0; font-size:10px; opacity:.45; }
 .dtb-settings .dtb-preview-trigger { display:flex; align-items:center; justify-content:flex-end; gap:6px; min-width:0; padding:5px 8px; border-radius:7px; background:color-mix(in srgb,currentColor 4%,transparent); }
 .dtb-settings .dtb-preview-trigger .dtb-caption { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
