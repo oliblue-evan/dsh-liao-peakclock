@@ -1,0 +1,15 @@
+node_modules/
+dist/*
+!dist/index.js
+!dist/client.js
+.preview/
+test-results/
+playwright-report/
+*.tgz
+.install-check/
+artifacts/
+
+.DS_Store
+.env
+.env.*
+.npmrc

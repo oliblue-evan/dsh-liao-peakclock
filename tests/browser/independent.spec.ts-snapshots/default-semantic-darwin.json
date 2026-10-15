@@ -1,0 +1,27 @@
+{
+  "preview": [
+    "DS4.1F · 峰 2:30",
+    "DS4.1F · 谷 2:30"
+  ],
+  "references": [
+    false,
+    false,
+    false
+  ],
+  "sections": [
+    "当前峰谷情况",
+    "显示偏好",
+    "价格与规则"
+  ],
+  "selects": [
+    "compact",
+    "text",
+    "short"
+  ],
+  "switches": [
+    true,
+    true,
+    false,
+    true
+  ]
+}

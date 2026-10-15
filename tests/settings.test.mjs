@@ -1,0 +1,58 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import vm from 'node:vm';
+import { buildSync } from 'esbuild';
+import { JSDOM } from 'jsdom';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
+import { createPreferences } from '../src/preferences.ts';
+import { createCalendarStore } from '../src/calendar-store.ts';
+const require = createRequire(import.meta.url);
+
+test('settings keep reference disclosure open across live band changes and preview follows accepted preferences', () => {
+  const dom = new JSDOM('<div id="root"></div>', { pretendToBeVisual: true, url: 'http://localhost' });
+  const previous = { window: globalThis.window, document: globalThis.document };
+  globalThis.window = dom.window; globalThis.document = dom.window.document;
+  const root = createRoot(dom.window.document.querySelector('#root'));
+  const output = buildSync({ entryPoints: ['src/settings.tsx'], bundle: true, platform: 'node', format: 'cjs', write: false, external: ['react', 'react/jsx-runtime'] }).outputFiles[0].text;
+  const module = { exports: {} };
+  vm.runInNewContext(output, { require, module, exports: module.exports, TextEncoder, URL });
+  const { Settings } = module.exports;
+  const preferences = createPreferences(() => dom.window.localStorage);
+  const calendarStore = createCalendarStore(() => dom.window.localStorage);
+  let now = Date.parse('2026-10-15T11:30:00+08:00');
+  const listeners = new Set();
+  const clock = { getSnapshot: () => now, subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); } };
+  try {
+    flushSync(() => root.render(React.createElement(Settings, { view: 'page', preferences, calendarStore, clock })));
+    const doc = dom.window.document, details = [...doc.querySelectorAll('.dtb-reference details')];
+    assert.equal(details.length, 3); assert.ok(details.every(item => !item.open));
+    assert.equal(doc.querySelector('[role="timer"]').textContent, '0:30:00');
+    details[0].querySelector('summary').click(); assert.equal(details[0].open, true);
+    now = Date.parse('2026-10-15T12:00:00+08:00');
+    flushSync(() => { for (const fn of listeners) fn(); });
+    assert.equal(doc.querySelector('[role="timer"]').textContent, '2:00:00');
+    assert.equal(doc.querySelector('.dtb-reference details'), details[0]); assert.equal(details[0].open, true);
+    assert.match(doc.querySelector('th[data-current="true"]').textContent, /谷时/);
+    flushSync(() => preferences.set({ enabled: false }));
+    assert.match(doc.querySelector('.dtb-sample').textContent, /DeepSeek-V4.1-Flash · x0.11/);
+    assert.equal(doc.querySelector('input[role="switch"]').checked, false);
+    flushSync(() => doc.querySelectorAll('.dtb-presets button')[2].click());
+    assert.equal(preferences.getSnapshot().enabled, false);
+    assert.equal(doc.querySelector('input[role="switch"]').checked, false);
+    assert.equal(preferences.getSnapshot().appearance, 'badge');
+    flushSync(() => preferences.set({ enabled: true }));
+    assert.equal(doc.querySelectorAll('.dtb-sample [data-appearance="badge"]').length, 2);
+    assert.match(doc.querySelector('.dtb-sample').textContent, /DeepSeek-V4.1-Flash · x0.11/);
+    const selector = doc.querySelector('.dtb-select-grid select');
+    now += 1000; flushSync(() => { for (const fn of listeners) fn(); });
+    assert.equal(doc.querySelector('.dtb-select-grid select'), selector);
+    assert.equal(selector.value, 'original');
+    flushSync(() => doc.querySelector('.dtb-reset').click());
+    assert.equal(preferences.getSnapshot().modelName, 'compact');
+    assert.match(doc.querySelector('.dtb-sample').textContent, /DS4.1F/);
+    flushSync(() => root.unmount()); assert.equal(listeners.size, 0);
+  } finally { globalThis.window = previous.window; globalThis.document = previous.document; dom.window.close(); }
+});
