@@ -1,6 +1,6 @@
 {
   "name": "dsh-peakclock",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "峰谷倒计时：模型名称中的时段与倒计时，附实时状态、显示预览和计费说明。",
   "type": "module",
   "license": "MIT",
