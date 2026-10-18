@@ -14,7 +14,7 @@ const temp = await mkdtemp(join(tmpdir(),'deepseek-time-pack-'));
 try {
   execFileSync('tar',['-xzf',tarball,'-C',temp]);
   const pkgRoot = join(temp,'package'), pkg = JSON.parse(await readFile(join(pkgRoot,'package.json'),'utf8'));
-  assert.equal(pkg.name,'dsh-peakclock'); assert.equal(pkg.version,'0.1.1');
+  assert.equal(pkg.name,'dsh-liao-peakclock'); assert.equal(pkg.version,'0.1.1');
   await mkdir(join(temp,'node_modules')); await symlink(pkgRoot,join(temp,'node_modules',pkg.name),'dir');
   const require = createRequire(join(temp,'consumer.mjs'));
   const locale = JSON.parse(await readFile(require.resolve(`${pkg.name}/locale/zh.json`),'utf8'));

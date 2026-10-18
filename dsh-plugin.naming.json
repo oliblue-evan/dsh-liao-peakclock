@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "policy": "dsh-plugin-naming/v1",
   "plugin": {
-    "namespace": "oliblue-evan",
+    "namespace": "liao",
     "name": "peakclock",
-    "coordinate": "oliblue-evan/peakclock",
-    "packageName": "dsh-peakclock"
+    "coordinate": "liao/peakclock",
+    "packageName": "dsh-liao-peakclock"
   },
   "names": {
     "pluginNames": [
@@ -13,7 +13,7 @@
     ],
     "loaderIds": [
       "peakclock",
-      "dsh-peakclock"
+      "dsh-liao-peakclock"
     ],
     "services": [],
     "tools": [],
@@ -22,7 +22,7 @@
     "skillProviders": [],
     "events": [],
     "settingsNamespaces": [
-      "dsh-peakclock"
+      "dsh-liao-peakclock"
     ],
     "routes": []
   }

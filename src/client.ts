@@ -16,7 +16,7 @@ export const inject = ['slots', 'modelDirectories'];
 export function apply(ctx: Context): void {
   ctx.effect(() => {
     const style = document.createElement('style');
-    style.dataset.plugin = 'dsh-peakclock'; style.textContent = css;
+    style.dataset.plugin = 'dsh-liao-peakclock'; style.textContent = css;
     document.head.append(style); return () => style.remove();
   });
   const clock = createClock(), calendarStore = createCalendarStore(), preferences = createPreferences();
@@ -30,7 +30,7 @@ export function apply(ctx: Context): void {
     inject: sessionId => ({ directory: ctx.modelDirectories.directoryFor(sessionId).store, preferences, calendarStore, clock }),
   }, ModelBinding));
   ctx.slots.inject('plugins.bundle.config', () => ctx.slots.register({
-    name: 'plugins.bundle.config', key: 'dsh-peakclock',
+    name: 'plugins.bundle.config', key: 'dsh-liao-peakclock',
     inject: () => ({ clock, calendarStore, preferences }),
   }, Settings));
 }

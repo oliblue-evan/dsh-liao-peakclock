@@ -1,6 +1,6 @@
 # 峰谷倒计时
 
-独立插件 **dsh-peakclock**，当前版本 **0.1.1**，适配 **DeepSeek Harness 0.2.0-rc.2**。
+独立插件 **dsh-liao-peakclock**，当前版本 **0.1.1**，适配 **DeepSeek Harness 0.2.0-rc.2**。
 
 在原生模型选择器中显示 `DS4.1F · 谷 2:30 · High`。峰时用琥珀色，谷时用青绿色；倒计时为小时:分钟，完整型号保留在悬停提示中。
 
@@ -25,13 +25,13 @@
 在 DSH 插件页选择“添加插件”，输入：
 
 ```text
-github:oliblue-evan/dsh-peakclock
+github:oliblue-evan/dsh-liao-peakclock
 ```
 
 或使用 CLI（将 `desktop` 换成自己的 Profile 名称）：
 
 ```sh
-dsh plugin --profile desktop add github:oliblue-evan/dsh-peakclock
+dsh plugin --profile desktop add github:oliblue-evan/dsh-liao-peakclock
 ```
 
 仓库包含预构建产物，安装时无需编译源码。仅声明支持 DSH **0.2.0-rc.2**；其他版本须先核验兼容性。目前未发布 npm 包。
@@ -78,7 +78,7 @@ npm run build
 npm test
 npm run test:browser
 npm pack --ignore-scripts
-npm run test:artifact -- ./dsh-peakclock-0.1.1.tgz
+npm run test:artifact -- ./dsh-liao-peakclock-0.1.1.tgz
 ```
 
 `compatibility` 仅核验精确目标 0.2.0-rc.2，不追随 npm latest，也不修改宿主。

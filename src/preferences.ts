@@ -1,5 +1,5 @@
 import { readStored } from './storage.ts';
-export const PREFERENCES_KEY = 'dsh-peakclock/compact-preferences/v1';
+export const PREFERENCES_KEY = 'dsh-liao-peakclock/compact-preferences/v1';
 export interface DisplayPreferences {
   enabled: boolean;
   colored: boolean;
@@ -40,7 +40,7 @@ function normalize(value: unknown): DisplayPreferences {
 export function createPreferences(getStorage: () => Pick<Storage, 'getItem' | 'setItem'> = () => window.localStorage) {
   const listeners = new Set<() => void>();
   const read = () => {
-    try { return { ...normalize(JSON.parse(readStored(getStorage(), PREFERENCES_KEY, 'dsh-oliblue-deepseek-time/compact-preferences/v1', 'dsh-timeband/compact-preferences/v1') ?? '{}')), error: false }; }
+    try { return { ...normalize(JSON.parse(readStored(getStorage(), PREFERENCES_KEY, 'dsh-peakclock/compact-preferences/v1', 'dsh-oliblue-deepseek-time/compact-preferences/v1', 'dsh-timeband/compact-preferences/v1') ?? '{}')), error: false }; }
     catch { return { ...DEFAULT_PREFERENCES, error: true }; }
   };
   let state = read();

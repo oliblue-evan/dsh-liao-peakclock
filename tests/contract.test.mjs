@@ -48,13 +48,13 @@ test('built artifact mounts in real rc.2 Cordis/SlotRegistry, follows slot lifet
   const oldDoc = globalThis.document, oldWin = globalThis.window;
   globalThis.document = dom.window.document;
   globalThis.window = dom.window;
-  const styles = () => [...dom.window.document.querySelectorAll('style[data-plugin="dsh-peakclock"]')];
+  const styles = () => [...dom.window.document.querySelectorAll('style[data-plugin="dsh-liao-peakclock"]')];
   let rootOwner;
   try {
     const rendererRegistration = factory(require.resolve('@deepseek-ai/dsh-client-ui-renderer/client'));
     const { SlotRegistry } = rendererRegistration.factory(require);
     const registration = factory('dist/client.js');
-    assert.equal(registration.id, 'dsh-peakclock');
+    assert.equal(registration.id, 'dsh-liao-peakclock');
     const requests = [];
     const plugin = registration.factory(id => { requests.push(id); return require(id); });
     assert.ok(requests.every(id => ['react', 'react-dom', 'react/jsx-runtime'].includes(id)));
@@ -74,7 +74,7 @@ test('built artifact mounts in real rc.2 Cordis/SlotRegistry, follows slot lifet
     const declare = () => ctx.get('slots').register({ name: 'root', children: { 'plugins.bundle.config': { kind: 'keyed', scope: 'root' } } }, () => null);
     const remove = declare();
     assert.equal(ctx.get('slots').entries('plugins.bundle.config').length, 1);
-    assert.equal(ctx.get('slots').entries('plugins.bundle.config')[0].options.key, 'dsh-peakclock');
+    assert.equal(ctx.get('slots').entries('plugins.bundle.config')[0].options.key, 'dsh-liao-peakclock');
     remove();
     assert.equal(ctx.get('slots').entries('plugins.bundle.config').length, 0);
     const removeAgain = declare();

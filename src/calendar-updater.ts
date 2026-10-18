@@ -4,7 +4,7 @@ import { parseHolidayFeed } from './calendar-feed.ts';
 import type { CalendarStore, CalendarUpdateStatus } from './calendar-store.ts';
 import { calendarCoverage, chinaDay, DAY, HOUR } from './schedule.ts';
 
-export const CALENDAR_CHECK_STORAGE_KEY = 'dsh-peakclock/calendar-check/v1';
+export const CALENDAR_CHECK_STORAGE_KEY = 'dsh-liao-peakclock/calendar-check/v1';
 export const CALENDAR_RETRY = DAY;
 export const CALENDAR_TIMEOUT = 10_000;
 type CheckRecord = { year: number; at: number; status: 'waiting' | 'failed' };
@@ -40,7 +40,7 @@ export function createCalendarUpdater(options: Options) {
   const fetchCalendar = options.fetch ?? ((input, init) => fetch(input, init));
   const storage = options.getStorage ?? (() => window.localStorage);
   const synchronize = options.synchronize ?? (task => typeof navigator !== 'undefined' && navigator.locks
-    ? navigator.locks.request('dsh-peakclock-calendar-update', task) : task());
+    ? navigator.locks.request('dsh-liao-peakclock-calendar-update', task) : task());
   let running = false, busy = false, generation = 0;
   let request: AbortController | undefined, requestTimeout: ReturnType<typeof setTimeout> | undefined, lastCheck: CheckRecord | undefined;
   let nextPoll = 0, previous = options.store.getSnapshot().data;

@@ -2,7 +2,7 @@ import { readStored } from './storage.ts';
 import { calendar, CalendarError, mergeCalendars, parseCalendar } from './calendar.ts';
 import type { HolidayCalendar } from './calendar.ts';
 
-export const CALENDAR_STORAGE_KEY = 'dsh-peakclock/calendar/v1';
+export const CALENDAR_STORAGE_KEY = 'dsh-liao-peakclock/calendar/v1';
 type CalendarStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 export type CalendarUpdateStatus = 'idle' | 'checking' | 'waiting' | 'failed';
 export interface CalendarState {
@@ -16,7 +16,7 @@ export function createCalendarStore(getStorage: () => CalendarStorage = () => wi
   const listeners = new Set<() => void>();
   const read = (): Pick<CalendarState, 'data' | 'issue'> => {
     try {
-      const saved = readStored(getStorage(), CALENDAR_STORAGE_KEY, 'dsh-oliblue-deepseek-time/calendar/v1', 'dsh-timeband/calendar/v1');
+      const saved = readStored(getStorage(), CALENDAR_STORAGE_KEY, 'dsh-peakclock/calendar/v1', 'dsh-oliblue-deepseek-time/calendar/v1', 'dsh-timeband/calendar/v1');
       return saved === null ? { data: calendar, issue: null } : { data: mergeCalendars(calendar, parseCalendar(saved)), issue: null };
     } catch (error) {
       return { data: calendar, issue: error instanceof CalendarError ? error.kind : 'storage' };

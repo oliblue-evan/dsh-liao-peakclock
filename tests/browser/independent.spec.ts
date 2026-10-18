@@ -27,10 +27,10 @@ test('boundary changes remain live while a reference disclosure stays open', asy
 test('unload restores the native label and repeated reload owns exactly one style and caption', async ({ page }) => {
   for (let cycle = 0; cycle < 2; cycle++) {
     await page.getByRole('button', { name: '卸载插件', exact: true }).click();
-    await expect(page.locator(caption)).toHaveCount(0); await expect(page.locator('style[data-plugin="dsh-peakclock"]')).toHaveCount(0);
+    await expect(page.locator(caption)).toHaveCount(0); await expect(page.locator('style[data-plugin="dsh-liao-peakclock"]')).toHaveCount(0);
     await expect(page.locator('.fixture_triggerLabel')).toBeVisible();
     await page.getByRole('button', { name: '加载插件', exact: true }).click();
-    await expect(page.locator(caption)).toHaveCount(1); await expect(page.locator('style[data-plugin="dsh-peakclock"]')).toHaveCount(1);
+    await expect(page.locator(caption)).toHaveCount(1); await expect(page.locator('style[data-plugin="dsh-liao-peakclock"]')).toHaveCount(1);
   }
 });
 test('compact settings fit a narrow screen and a complete preset persists across reload', async ({ page }) => {

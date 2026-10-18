@@ -1,5 +1,5 @@
 {
-  "name": "dsh-peakclock",
+  "name": "dsh-liao-peakclock",
   "version": "0.1.2",
   "description": "峰谷倒计时：模型名称中的时段与倒计时，附实时状态、显示预览和计费说明。",
   "type": "module",
@@ -86,10 +86,10 @@
   "icon": "icon.svg",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oliblue-evan/dsh-peakclock.git"
+    "url": "git+https://github.com/oliblue-evan/dsh-liao-peakclock.git"
   },
-  "homepage": "https://github.com/oliblue-evan/dsh-peakclock#readme",
+  "homepage": "https://github.com/oliblue-evan/dsh-liao-peakclock#readme",
   "bugs": {
-    "url": "https://github.com/oliblue-evan/dsh-peakclock/issues"
+    "url": "https://github.com/oliblue-evan/dsh-liao-peakclock/issues"
   }
 }
