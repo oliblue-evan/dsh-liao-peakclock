@@ -23,7 +23,11 @@
     "icon.svg",
     "dsh-plugin.naming.json",
     "CHANGELOG.md",
-    "NOTICE"
+    "NOTICE",
+    "docs/detail.zh.md",
+    "docs/detail.en.md",
+    "docs/preview.zh.svg",
+    "docs/preview.en.svg"
   ],
   "keywords": [
     "dsh-plugin",
