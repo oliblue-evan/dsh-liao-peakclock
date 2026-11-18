@@ -1,3 +1,3 @@
-![Peak Countdown: a status pill and peak/off-peak timeline](preview.en.svg)
+![Peak Countdown model button and Beijing time timeline](preview.en.svg)
 
-Shows the current peak/off-peak window and countdown next to the model name, with an optional early notice. The calendar updates itself and can be limited to official providers.
+See the current peak or off-peak window and time left next to the model name. In settings, choose when to show the countdown and whether to limit it to official providers.

@@ -17,6 +17,15 @@ test('countdown is hours:minutes, rounds up and keeps long weekends', () => {
   assert.equal(compactCountdown(0), '0:00');
   assert.equal(compactCountdown(72 * 3600_000), '72:00');
 });
+test('known snapshot suffixes do not lengthen compact names or change original names', () => {
+  const model = 'DeepSeek-V4.1-Flash-1017 · CodeArts';
+  const identity = { id: 'codearts/deepseek-v4.1-flash-1017' };
+  const band = { band: 'peak' as const, countdown: '2:30' };
+  assert.equal(formatCaption(model, DEFAULT_PREFERENCES, band, identity)?.model, 'DS4.1F');
+  assert.equal(formatCaption(model, DISPLAY_PRESETS.detailed, band, identity)?.model, model);
+  assert.equal(shortModelName('deepseek-v4-pro-0813'), 'DS4P');
+  assert.equal(shortModelName('deepseek-v4.1-flash-distill-1017'), 'DS4.1Fdistill1017');
+});
 test('real schedule boundaries and missing calendars are honest', () => {
   const at = (s: string) => Date.parse(`${s}+08:00`);
   assert.equal(bandPresentation(at('2026-10-15T09:30:00'), calendar).text, '峰 2:30');

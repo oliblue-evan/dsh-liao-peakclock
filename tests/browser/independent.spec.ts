@@ -53,6 +53,38 @@ test('default assembled semantic snapshot', async ({ page }) => {
   expect(JSON.stringify(Object.fromEntries(Object.entries(result).sort(([a],[b]) => a.localeCompare(b))), null, 2) + '\n').toMatchSnapshot('default-semantic.json');
 });
 
+test('settings switch and surfaces follow DSH theme tokens in both states', async ({ page }) => {
+  const settings = page.locator('.dtb-settings');
+  const toggle = page.getByRole('switch', { name: '启用峰谷提示', exact: true });
+  const palette = (colors: Record<string, string>) => settings.evaluate((element, values) => {
+    for (const [key, value] of Object.entries(values)) (element as HTMLElement).style.setProperty(key, value);
+  }, colors);
+  await palette({
+    '--dsw-alias-brand-primary': 'rgb(249, 250, 251)',
+    '--dsw-alias-label-primary-foreground': 'rgb(15, 17, 21)',
+    '--dsw-alias-bg-layer-1': 'rgb(35, 35, 35)',
+  });
+  await expect(toggle).toHaveCSS('width', '36px');
+  await expect(toggle).toHaveCSS('height', '20px');
+  await expect(toggle).toHaveCSS('border-radius', '999px');
+  await expect(toggle).toHaveCSS('background-color', 'rgb(249, 250, 251)');
+  await expect(settings.locator('.dtb-status')).toHaveCSS('background-color', 'rgb(35, 35, 35)');
+  await expect.poll(() => toggle.evaluate(element => getComputedStyle(element, '::after').backgroundColor)).toBe('rgb(15, 17, 21)');
+
+  await palette({
+    '--dsw-alias-brand-primary': 'rgb(15, 17, 21)',
+    '--dsw-alias-label-primary-foreground': 'rgb(249, 250, 251)',
+    '--dsw-alias-bg-layer-1': 'rgb(246, 247, 249)',
+    '--dsw-alias-border-l3': 'rgb(226, 228, 232)',
+    '--dsw-alias-switch-thumb': 'rgb(110, 115, 123)',
+  });
+  await expect(settings.locator('.dtb-status')).toHaveCSS('background-color', 'rgb(246, 247, 249)');
+  await expect(toggle).toHaveCSS('background-color', 'rgb(15, 17, 21)');
+  await toggle.uncheck();
+  await expect(toggle).toHaveCSS('background-color', 'rgb(226, 228, 232)');
+  await expect.poll(() => toggle.evaluate(element => getComputedStyle(element, '::after').backgroundColor)).toBe('rgb(110, 115, 123)');
+});
+
 test('near countdown hides distant transitions; official-only excludes third-party providers and disabling hides controls', async ({page}) => {
   await page.getByRole('button',{name:'临近切换',exact:true}).click();
   await expect(page.locator(caption)).toContainText('0:01');

@@ -9,6 +9,7 @@ export function shortModelName(label: string): string | null {
   const name = label.trim().split(/[·•]/, 1)[0]!.trim();
   if (!isDeepSeek(name)) return null;
   const specific = name.replace(/^(?:[^/]+\/)*?deepseek[\s/_-]*/i, '').replace(/[_/-]+/g, ' ')
+    .replace(/^(v4\.1 flash) 1017$/i, '$1').replace(/^(v4 pro) 0813$/i, '$1')
     .replace(/\bV41\b/gi, '4.1').replace(/\bv(?=\d)/gi, '')
     .replace(/\bflash\b/gi, 'F').replace(/\bpro\b/gi, 'P');
   return `DS${specific.replace(/\s+/g, '')}`;

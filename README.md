@@ -1,6 +1,6 @@
 # 峰谷倒计时
 
-独立插件 **dsh-liao-peakclock**，当前版本 **0.1.1**，适配 **DeepSeek Harness 0.2.0-rc.2**。
+**dsh-liao-peakclock** 为 DeepSeek Harness 的模型选择器添加峰谷状态和倒计时。
 
 在原生模型选择器中显示 `DS4.1F · 谷 2:30 · High`。峰时用琥珀色，谷时用青绿色；倒计时为小时:分钟，完整型号保留在悬停提示中。
 
@@ -34,7 +34,7 @@ github:oliblue-evan/dsh-liao-peakclock
 dsh plugin --profile desktop add github:oliblue-evan/dsh-liao-peakclock
 ```
 
-仓库包含预构建产物，安装时无需编译源码。仅声明支持 DSH **0.2.0-rc.2**；其他版本须先核验兼容性。目前未发布 npm 包。
+GitHub 仓库包含预构建产物。npm 用户可在插件页输入 `dsh-liao-peakclock` 安装已发布的版本。DSH 版本范围以包的 `engines.dsh` 为准，测试基线和桌面版验证记录见 [兼容性说明](docs/compatibility.md)。
 
 ## 使用
 
@@ -46,7 +46,7 @@ dsh plugin --profile desktop add github:oliblue-evan/dsh-liao-peakclock
 - 生效范围：所有可识别的 DeepSeek 模型，或仅 DSH 官方账号与官方 API 来源；第三方渠道不视为官方计费。
 - 价格与规则：按需展开官方 API 的人民币价格快照、计费解释、峰谷规则与日历来源。
 
-模型识别优先读取当前输入框所属会话的模型 ID；带渠道前缀和自定义显示名也可识别。ID 尚不可用时才以名称兜底。多个会话分别绑定各自输入框，不读取全局默认模型替代会话状态。
+模型识别优先读取当前输入框所属会话的模型 ID，也支持带渠道前缀和自定义显示名的模型。ID 尚不可用时才以名称兜底。已知 Flash 和 Pro 快照的日期后缀会在简写中省略，完整型号仍可通过原始名称和悬停提示查看。
 
 模型名称处通常按分钟刷新；设置页打开时共享时钟切换为秒级，关闭后恢复分钟级。页面隐藏时暂停前台时钟，唤醒时重新读取系统时间。
 
@@ -78,10 +78,10 @@ npm run build
 npm test
 npm run test:browser
 npm pack --ignore-scripts
-npm run test:artifact -- ./dsh-liao-peakclock-0.1.1.tgz
+npm run test:artifact -- "./dsh-liao-peakclock-$(node -p 'require("./package.json").version').tgz"
 ```
 
-`compatibility` 仅核验精确目标 0.2.0-rc.2，不追随 npm latest，也不修改宿主。
+`compatibility` 核验测试依赖是否精确匹配 `peerDependencies` 的下界，目前为 `0.2.1-rc.2`。
 
 `npm run preview` 提供仅浏览器使用的回归夹具：加载实际构建产物，以模拟会话验证别名、切换、开关、时间边界和卸载。它不是 DSH Web 实例，不读取真实 Profile、账号或对话。浏览器测试使用这一夹具；真实 SlotRegistry 生命周期和多会话隔离另有构建产物/DOM 测试。
 

@@ -1,6 +1,6 @@
 # 兼容性与验证
 
-目标：DeepSeek Harness 0.2.0-rc.2，Node.js 22+。
+测试基线为 DeepSeek Harness `0.2.1-rc.2`，Node.js 22+。桌面验证目标为 macOS 上的 `0.2.2-rc.5`。
 
 - 模型身份取自公开的会话级 ModelDirectory。
 - 插件以不可见标记绑定当前输入框的 standardControls，并适配原生模型标签。rc.2 插槽的 display:contents 包装已纳入构建产物回归。

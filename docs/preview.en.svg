@@ -1,15 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" role="img">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9FAFE"/><stop offset="1" stop-color="#EBEFF9"/></linearGradient>
-<filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1B2140" flood-opacity="0.10"/></filter>
-<filter id="shs" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1B2140" flood-opacity="0.08"/></filter>
-</defs>
-<rect width="640" height="300" rx="18" fill="url(#bg)"/>
-<circle cx="566" cy="40" r="96" fill="#C7CFFB" opacity="0.26"/>
-<circle cx="48" cy="286" r="86" fill="#DCE2FB" opacity="0.40"/>
-<text x="44" y="122" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="26" font-weight="600" fill="#151922" text-anchor="start" letter-spacing="-0.6">Peak and off-peak</text>
-<text x="44" y="158" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="26" font-weight="600" fill="#151922" text-anchor="start" letter-spacing="-0.6">at a glance</text>
-<text x="44" y="206" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#5B6274" text-anchor="start">Window and countdown next to the model name</text>
-<text x="44" y="225" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="12" font-weight="400" fill="#5B6274" text-anchor="start">Optional early notice before switching</text>
-<rect x="300" y="44" width="296" height="212" rx="15" fill="#FFFFFF" filter="url(#sh)" stroke="#1B2140" stroke-opacity="0.05"/><rect x="352" y="66" width="192" height="38" rx="19" fill="#FFFFFF" stroke="#E7EAF4"/><circle cx="372" cy="85" r="4.5" fill="#2FA36B"/><text x="386" y="90" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="12" font-weight="600" fill="#1F2430" text-anchor="start">Off-peak</text><text x="520" y="90" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="11" font-weight="400" fill="#6B7285" text-anchor="start">8:47 left</text><rect x="330" y="132" width="236" height="12" rx="6" fill="#DCE0EC"/><rect x="330" y="132" width="96" height="12" rx="6" fill="#C9CFE0"/><rect x="426" y="132" width="80" height="12" rx="6" fill="#5B6BEF"/><rect x="506" y="132" width="60" height="12" rx="6" fill="#C9CFE0"/><text x="330" y="162" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="9" font-weight="400" fill="#8A90A0" text-anchor="start">Peak</text><text x="474" y="162" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="9" font-weight="500" fill="#5B6BEF" text-anchor="start">Off</text><text x="566" y="162" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="9" font-weight="400" fill="#8A90A0" text-anchor="end">Peak</text><rect x="352" y="182" width="78" height="22" rx="11" fill="#E8F5EE" stroke="none"/><text x="391" y="197" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="9.5" font-weight="500" fill="#2C8F58" text-anchor="middle">Save 75%</text><text x="444" y="197" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="9" font-weight="400" fill="#8A90A0" text-anchor="start">Switches at 08:47</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" role="img" aria-labelledby="title">
+  <title id="title">Peak Countdown model button and Beijing time timeline</title>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1"><stop stop-color="#F9FAFE"/><stop offset="1" stop-color="#EBEFF9"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1B2140" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="640" height="300" rx="18" fill="url(#background)"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,sans-serif">
+    <text x="42" y="120" font-size="26" font-weight="600" fill="#151922">Peak Countdown</text>
+    <text x="42" y="157" font-size="13" fill="#5B6274">See the current window and</text>
+    <text x="42" y="178" font-size="13" fill="#5B6274">time left by the model name.</text>
+    <rect x="278" y="50" width="320" height="200" rx="16" fill="#FFF" filter="url(#shadow)"/>
+    <rect x="301" y="74" width="274" height="38" rx="8" fill="#F0F2FA"/>
+    <text x="316" y="98" font-size="14" fill="#252C3C">DS4.1F <tspan fill="#237460">· 谷 12:47</tspan><tspan fill="#5B6274"> · High</tspan></text>
+    <path d="m553 91 4 4 4-4" stroke="#5B6274" stroke-width="1.5" fill="none"/>
+    <text x="312" y="146" font-size="11" fill="#5B6274">20:13 Beijing time</text>
+    <text x="564" y="146" text-anchor="end" font-size="11" fill="#5B6274">Next window · Tomorrow 09:00</text>
+    <rect x="312" y="165" width="252" height="8" rx="4" fill="#6BAF9C"/>
+    <path d="M406.5 169h31.5m21 0h42" stroke="#C79761" stroke-width="8"/>
+    <path d="M524.3 159v20" stroke="#252C3C" stroke-width="2"/>
+    <g font-size="10" fill="#5B6274">
+      <text x="312" y="194">00:00</text><text x="438" y="194" text-anchor="middle">12:00</text><text x="564" y="194" text-anchor="end">24:00</text>
+      <circle cx="316" cy="222" r="4" fill="#6BAF9C"/><text x="326" y="226">Off-peak (谷)</text>
+      <circle cx="408" cy="222" r="4" fill="#C79761"/><text x="418" y="226">Peak (峰)</text>
+    </g>
+  </g>
 </svg>
